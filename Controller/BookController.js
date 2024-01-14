@@ -26,7 +26,6 @@ export async function deleteBookController(req, res, next){
 }
 export async function uploadBookImageController(req, res, next){
           try {
-                    console.log("Request", req);
                     if(!req.file) throw new RequestError("File not found");
                     const imageUrl=await uploadBookImage(req.body.bookId, req.file);
                     return res.status(200).send(imageUrl);

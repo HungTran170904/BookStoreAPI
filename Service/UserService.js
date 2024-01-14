@@ -56,7 +56,7 @@ export async function loginService({email, password}){
 export async function NewAccessTokenService({refreshToken}){
           var decoded=jwt.verify(refreshToken, SERCRET_KEY);
           const user=await User.findOne({where:{id: decoded.userId}})
-          if(decoded.userId==user.id&&refreshToken==user.refreshToken)
+          if(refreshToken==user.refreshToken)
                     return generateToken(user,1, "ACCESS");
           else throw new TokenError("Refresh token is invalid");
 }

@@ -10,7 +10,7 @@ export async function addOrderController(req, res, next){
 }
 export async function updateOrderController(req, res, next){
           try {
-                    const order=await updateOrderService(req.user, req.body);
+                    const order=await updateOrderService(req.body);
                     return res.status(200).json(order);
           } catch (error) {
                     next(error);

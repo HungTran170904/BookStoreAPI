@@ -5,7 +5,7 @@ import { NewAccessTokenService, addNewUserService, loginService } from "../Servi
 
 export async function loginController(req, res, next){
           try {
-                    const loginDTO=await loginService(req.query);
+                    const loginDTO=await loginService(req.body);
                     return res.status(200).json(loginDTO);
           } catch (error) {
                     next(error);
@@ -13,7 +13,7 @@ export async function loginController(req, res, next){
 }
 export async function NewAccessTokenController(req, res, next){
           try {
-                    const newAccessToken=await NewAccessTokenService(req.query);
+                    const newAccessToken=await NewAccessTokenService(req.body);
                     return res.status(200).send(newAccessToken);
           } catch (error) {
                     next(error);
