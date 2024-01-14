@@ -16,13 +16,16 @@ export async function findByPaginationService({offset, limit}){
                     offset: parseInt(offset),
                     limit:parseInt(limit)});
 }
+export async function deleteBookService(bookId){
+          await Book.destroy({
+                    where:{id: bookId}
+          })
+}
 export async function uploadBookImage(bookId, file){
+          console.log("BookId", bookId)
           const book=await Book.findOne({where:{id: bookId}});
           if(!book) throw new RequestError("BookId "+bookId+" does not exist");
-          if(book.imageUrl) await uploadImage(file, book.imageUrl);
-          else{
-                    book.imageUrl=await uploadImage(imagePath);
-                    await book.save();
-          }
+          book.imageUrl=await uploadImage(file, book.imageUrl);
+          await book.save();
           return book.imageUrl;
 }

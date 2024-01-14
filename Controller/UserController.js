@@ -31,11 +31,7 @@ export async function addNewUserController(req, res, next){
 export async function uploadProfileController(req, res, next){
           try {     
                     if(!req.file) throw new RequestError("File not found");
-                    if(req.user.profileUrl) await uploadImage(req.file, req.user.profileUrl);
-                    else{
-                              req.user.profileUrl= await uploadImage(req.file);
-                              await req.user.save();
-                    }
+                    req.user.profileUrl= await uploadImage(req.file, req.user.profileUrl);
                     return res.status(200).send(req.user.profileUrl);
           } catch (error) {
                     next(error)
