@@ -13,7 +13,7 @@ export async function addNewUserService(newUser){
                     throw new RequestError("password should contain at least one number and one special character");
           newUser.password=bcrypt.hashSync(newUser.password, parseInt(SALT_ROUNDS));
           newUser.role="USER";
-          const savedUser=await User.create(newUser);
+          const savedUser=await User.create(newUser); 
           return {
                     id: savedUser.id,
                     email: savedUser.email,
@@ -31,12 +31,8 @@ function checkPassword(password){
 }
 function generateToken(user,time, type){
           const dataInToken={userId: user.id,name: user.name, type: type}
-          try {
-                    var token = jwt.sign(dataInToken, SERCRET_KEY, { algorithm:"HS256", expiresIn: time * 3600 });
-                    return token;
-          } catch (error) {
-                    console.log("Token generation error", error);
-          }
+          var token = jwt.sign(dataInToken, SERCRET_KEY, { algorithm:"HS256", expiresIn: time * 3600 });
+          return token;
 }
 export async function loginService({email, password}){
           const user=await User.findOne({where:{email: email}})

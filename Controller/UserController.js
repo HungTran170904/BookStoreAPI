@@ -8,6 +8,7 @@ export async function loginController(req, res, next){
                     const loginDTO=await loginService(req.body);
                     return res.status(200).json(loginDTO);
           } catch (error) {
+                    console.log(error)
                     next(error);
           }
 }
@@ -24,7 +25,6 @@ export async function addNewUserController(req, res, next){
                     const user=await addNewUserService(req.body);
                     return res.status(200).json(user);
           } catch (error) {
-                    console.log("Error is catched")
                     next(error);
           }
 }
